@@ -17,9 +17,7 @@ const mock_notes = [
         category: 'Personal',
         content: 'This is the content of Note 2.',
         archived: false,
-
         dates: ['2023-07-26']
-
     },
     {
         id: 3,
@@ -76,20 +74,20 @@ const mock_categories = [
     {
         id: 1,
         name: 'Work',
-        count_active: 2,
-        count_archived: 1
+        count_active: 3,
+        count_archived: 0
     },
     {
         id: 2,
         name: 'Personal',
-        count_active: 1,
-        count_archived: 1
+        count_active: 2,
+        count_archived: 0
     },
     {
         id: 3,
         name: 'Study',
-        count_active: 1,
-        count_archived: 2
+        count_active: 2,
+        count_archived: 0
     },
 
 ];
@@ -97,6 +95,14 @@ export let notes = mock_notes
 export let categories = mock_categories
 export const delete_note = (item) => {
     notes = notes.filter(i => i.id !== item.id);
+    let indexOfObjectToUpdate = categories.findIndex(obj => obj.name === item.category)
+    if (item.archived){
+        categories[indexOfObjectToUpdate].count_archived -= 1
+    }else{
+        categories[indexOfObjectToUpdate].count_active -= 1
+
+    }
+
 }
 export const add_note = ({name, category, content}) => {
     notes.push({
@@ -108,6 +114,8 @@ export const add_note = ({name, category, content}) => {
         dates: extractDatesFromText(content),
         archived: false,
     },)
+    let indexOfObjectToUpdate = categories.findIndex(obj => obj.name === category)
+    categories[indexOfObjectToUpdate].count_active += 1
 }
 
 export const update_note = ({id, name, category, content, archived}) => {
@@ -117,7 +125,18 @@ export const update_note = ({id, name, category, content, archived}) => {
         notes = notes.map((obj, index) =>
             index === indexOfObjectToUpdate ? {...obj, ...{id, name, category, content, archived}} : obj
         )
-    }else{
+        let index = categories.findIndex(obj => obj.name === category)
+        if (archived){
+            categories[index].count_active -= 1
+            categories[index].count_archived += 1
+        }else{
+            categories[index].count_active += 1
+            categories[index].count_archived -= 1
+
+        }
+
+
+    } else {
         add_note({name, category, content})
     }
 }

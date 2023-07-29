@@ -1,10 +1,11 @@
 
 
-import {render_table} from "./table.js";
-import {add_note, notes} from "./state.js";
+import {render_table, render_table_categories} from "./table.js";
+import {add_note, categories, notes} from "./state.js";
 import {open_modal} from "./modal.js";
 
 render_table(notes)
+
 
 const add_btn = document.querySelector('.add_note_btn')
 

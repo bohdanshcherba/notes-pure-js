@@ -1,8 +1,9 @@
-import {delete_note, notes, update_note} from "./state.js";
+import {categories, delete_note, notes, update_note} from "./state.js";
 import {open_modal} from "./modal.js";
 
 const keys = ['name', 'created', 'category', 'content', 'dates']
 const table = document.getElementsByClassName('content')[0]
+const table_categories = document.getElementsByClassName('categories_content')[0]
 
 const onEdit = (item) => {
     open_modal({
@@ -80,10 +81,33 @@ const add_row = (item) => {
     return item
 }
 
+const add_row_category = (item) => {
+    const row = document.createElement('div')
+    row.classList.add('row', 'table_row')
+
+
+
+    const keys= ['name','count_active', 'count_archived']
+    keys.map(key=>{
+        const column = document.createElement('div')
+        column.classList.add('table_item')
+        column.textContent = item[key]
+        row.appendChild(column)
+    })
+    table_categories.appendChild(row)
+}
+
 export const render_table = (data) => {
     table.innerHTML = ''
     data.map((item) => {
         add_row(item)
     })
+    render_table_categories(categories)
+}
 
+export const render_table_categories = (data) => {
+    table_categories.innerHTML = ''
+  data.map((item)=>{
+      add_row_category(item)
+  })
 }

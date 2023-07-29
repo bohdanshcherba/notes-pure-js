@@ -32,15 +32,16 @@ export const open_modal = (
         const content = modal.children[3].value
         const category = modal.children[4].children[1].value
 
-        if (name !== '') {
+        if (name !== '' && category !== '') {
 
             onSave(name, content, category)
 
             modal.children[1].value = ''
             modal.children[3].value = ''
             modal.classList.add('visible')
+            modal_save_btn.removeEventListener('click',onClick)
         }
-        modal_save_btn.removeEventListener('click',onClick)
+
     }
 
     modal_save_btn.addEventListener('click', onClick)

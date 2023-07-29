@@ -3,8 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Notes</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="container">
+    <div class="table">
+        <div class="row table_header">
+            <div class="table_header_item table_row_ico"></div>
+            <div class="table_header_item">Name</div>
+            <div class="table_header_item">Created</div>
+            <div class="table_header_item">Category</div>
+            <div class="table_header_item">Content</div>
+            <div class="table_header_item">Dates</div>
+            <div class="table_header_item table_item_navigation"></div>
+        </div>
+        <div class="content">
+
+        </div>
+
+
+    </div>
+    <div class="add_note">
+        <button class="add_note_btn">add note</button>
+    </div>
+</div>
+<div class="modal visible">
+    <p>Note name</p>
+    <input type="text" />
+    <p>Content</p>
+    <textarea ></textarea>
+
+    <div class="modal_footer">
+        <label>Category:</label>
+        <select id="category" name="category">
+
+        </select>
+        <button id="save_btn">Save</button>
+    </div>
+
+
+</div>
 
 </body>
+<script src="index.js" type="module"></script>
 </html>
